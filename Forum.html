@@ -117,23 +117,28 @@
         </div>
     </footer>
 
-    <script>
-        function askQuestion() {
-            let coins = parseInt(localStorage.getItem('relearn_coins') || '0');
-            if (coins >= 5) {
-                if (confirm('Möchtest du 5 Münzen ausgeben, um eine Frage zu stellen?')) {
-                    coins -= 5;
-                    localStorage.setItem('relearn_coins', coins);
-                    alert('Frage erfolgreich gepostet! -5 Münzen. (Verbleibend: ' + coins + ')');
-                    // In a real app, this would open a modal or redirect to a form.
-                    // For now, we simulate success.else {
-                if (confirm('Nicht genug Münzen! Du hast ' + coins + '. Du brauchst 5.\nMöchtest du Münzen sammeln spielen?')) {
-                    window.location.href = 'game.html';
-                }
+   <script>
+    const COINS_REQUIRED = 5;
+
+    function askQuestion() {
+        let coins = parseInt(localStorage.getItem('relearn_coins') || '0');
+        if (coins >= COINS_REQUIRED) {
+            if (confirm(`Möchtest du ${COINS_REQUIRED} Münzen ausgeben, um eine Frage zu stellen?`)) {
+                coins -= COINS_REQUIRED;
+                localStorage.setItem('relearn_coins', coins);
+                alert(`Frage erfolgreich gepostet! -${COINS_REQUIRED} Münzen. (Verbleibend: ${coins})`);
+                // TODO: Open modal or redirect to question form.
+            }
+        } else {
+            if (confirm(`Nicht genug Münzen! Du hast ${coins}. Du brauchst ${COINS_REQUIRED}.\nMöchtest du Münzen sammeln spielen?`)) {
+                window.location.href = 'game.html';
             }
         }
-    </script>
+    }
+</script>
+
 </body>
 
 
 </html>
+
