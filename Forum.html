@@ -126,9 +126,7 @@
                     localStorage.setItem('relearn_coins', coins);
                     alert('Frage erfolgreich gepostet! -5 Münzen. (Verbleibend: ' + coins + ')');
                     // In a real app, this would open a modal or redirect to a form.
-                    // For now, we simulate success.
-                }
-            } else {
+                    // For now, we simulate success.else {
                 if (confirm('Nicht genug Münzen! Du hast ' + coins + '. Du brauchst 5.\nMöchtest du Münzen sammeln spielen?')) {
                     window.location.href = 'game.html';
                 }
@@ -136,5 +134,6 @@
         }
     </script>
 </body>
+
 
 </html>
