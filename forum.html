@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="forum.html" class="active">Forum</a></li>
+                    <li><a href="buddy.html">Study Buddy</a></li>
+                    <li><a href="game.html">Coin Game</a></li>
+                    <li><a href="login.html" class="btn btn-login"
+                            style="padding: 1rem 2rem; font-size: 1.2rem;">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="flex-between" style="margin-bottom: 2rem;">
+            <h1>Community Forum</h1>
+            <button class="btn btn-primary" onclick="askQuestion()">+ Frage stellen (5 🪙)</button>
+        </div>
+
+        <div class="forum-layout">
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3 style="margin-bottom: 1rem;">Themen</h3>
+                <ul class="menu-list">
+                    <li><a href="#" class="active">Alle Themen</a></li>
+                    <li><a href="#">Mathematik</a></li>
+                    <li><a href="#">Sprachen</a></li>
+                    <li><a href="#">Naturwissenschaften</a></li>
+                    <li><a href="#">Geschichte & Politik</a></li>
+                    <li><a href="#">Sonstiges</a></li>
+                </ul>
+            </aside>
+
+            <!-- Feed -->
+            <div class="post-feed animate-fade">
+
+                <!-- Post 1 -->
+                <article class="card post-card">
+                    <div class="post-header">
+                        <div class="user-info">
+                            <div class="user-avatar" style="background: black; color: white;">L</div>
+                            <div>
+                                <div style="font-weight: bold;">Lisa Müller</div>
+                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Vor 10 Min.</div>
+                            </div>
+                        </div>
+                        <span class="tag tag-math">Mathe</span>
+                    </div>
+                    <div>
+                        <h3>Hilfe bei Vektorrechnung?</h3>
+                        <p style="color: var(--color-text-muted);">Ich verstehe nicht ganz, wie man den Normalenvektor
+                            einer Ebene berechnet. Kann mir das jemand erklären?</p>
+                    </div>
+                    <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;" class="flex-between">
+                        <div class="comment-count">
+                            <span>💬 3 Antworten</span>
+                        </div>
+                        <button class="btn"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Antworten</button>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="card post-card">
+                    <div class="post-header">
+                        <div class="user-info">
+                            <div class="user-avatar" style="background: white; color: black; border: 2px solid black;">T
+                            </div>
+                            <div>
+                                <div style="font-weight: bold;">Tom Schmidt</div>
+                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Vor 45 Min.</div>
+                            </div>
+                        </div>
+                        <span class="tag tag-lang">Französisch</span>
+                    </div>
+                    <div>
+                        <h3>Subjonctif Bildung</h3>
+                        <p style="color: var(--color-text-muted);">Wann genau benutze ich den Subjonctif nach "espérer"?
+                            Dachte das wäre nur bei Wunsch?</p>
+                    </div>
+                    <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;" class="flex-between">
+                        <div class="comment-count">
+                            <span>💬 0 Antworten</span>
+                        </div>
+                        <button class="btn"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Antworten</button>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ReLearn</p>
+        </div>
+    </footer>
+
+    <script>
+        function askQuestion() {
+            let coins = parseInt(localStorage.getItem('relearn_coins') || '0');
+            if (coins >= 5) {
+                if (confirm('Möchtest du 5 Münzen ausgeben, um eine Frage zu stellen?')) {
+                    coins -= 5;
+                    localStorage.setItem('relearn_coins', coins);
+                    alert('Frage erfolgreich gepostet! -5 Münzen. (Verbleibend: ' + coins + ')');
+                    // In a real app, this would open a modal or redirect to a form.
+                    // For now, we simulate success.
+                }
+            } else {
+                if (confirm('Nicht genug Münzen! Du hast ' + coins + '. Du brauchst 5.\nMöchtest du Münzen sammeln spielen?')) {
+                    window.location.href = 'game.html';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
