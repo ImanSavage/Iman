@@ -1,0 +1,13 @@
+# Zellbiologie Übersicht
+
+1. Mitose (Kernteilung)
+   - Prophase
+   - Metaphase
+   - Anaphase
+   - Telophase
+
+2. Meiose (Reifeteilung)
+   - Entstehung von Keimzellen
+   - Rekombination des Erbguts
+
+Wichtig: Unterschied zwischen Tier- und Pflanzenzellen beachten!

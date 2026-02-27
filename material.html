@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lernmaterial - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="material.html" class="active">Lernmaterial</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="buddy.html">Study Buddy</a></li>
+                    <li><a href="game.html">Coin Game</a></li>
+                    <li><a href="login.html" class="btn btn-login"
+                            style="padding: 1rem 2rem; font-size: 1.2rem;">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="container flex-center flex-col animate-fade" style="padding: 3rem 0;">
+            <h1 style="margin-bottom: 2rem;">Finde dein Material</h1>
+
+            <div class="search-wrapper">
+                <input type="text" class="search-input" placeholder="Wass suchst du? (z.B. Mathe Klasse 10)">
+                <button class="btn btn-primary search-btn">Suchen</button>
+            </div>
+
+            <div class="flex-row gap-2" style="margin-top: 1rem;">
+                <span style="color: var(--color-text-muted);">Beliebt:</span>
+                <span class="tag tag-math">Analysis</span>
+                <span class="tag tag-history">Weltkrieg</span>
+                <span class="tag tag-lang">Grammatik</span>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 style="margin-bottom: 1.5rem; border-left: 4px solid var(--color-primary); padding-left: 1rem;">Neueste
+                Uploads</h2>
+
+            <div class="flex-row gap-2" style="flex-wrap: wrap;">
+
+                <!-- Material Card 1 -->
+                <article class="card flex-col gap-1" style="flex: 1; min-width: 300px;">
+                    <div class="flex-between">
+                        <span class="tag tag-math">Mathematik</span>
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem;">Vor 2 Std.</span>
+                    </div>
+                    <h3>Kurvendiskussion Zusammenfassung</h3>
+                    <p style="color: var(--color-text-muted);">Komplette Übersicht zu Ableitungsregeln und
+                        Extremstellen.</p>
+                    <button class="btn btn-primary" style="margin-top: auto;"
+                        onclick="downloadMaterial(this, 'materials/mathe_analysis.txt')">Herunterladen (10 🪙)</button>
+                </article>
+
+                <!-- Material Card 2 -->
+                <article class="card flex-col gap-1" style="flex: 1; min-width: 300px;">
+                    <div class="flex-between">
+                        <span class="tag tag-science">Biologie</span>
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem;">Vor 5 Std.</span>
+                    </div>
+                    <h3>Zellbiologie Übersicht</h3>
+                    <p style="color: var(--color-text-muted);">PDF mit Grafiken zur Mitose und Meiose.</p>
+                    <button class="btn btn-primary" style="margin-top: auto;"
+                        onclick="downloadMaterial(this, 'materials/biologie_zellen.txt')">Herunterladen (10 🪙)</button>
+                </article>
+
+                <!-- Material Card 3 -->
+                <article class="card flex-col gap-1" style="flex: 1; min-width: 300px;">
+                    <div class="flex-between">
+                        <span class="tag tag-lang">Englisch</span>
+                        <span style="color: var(--color-text-muted); font-size: 0.9rem;">Gestern</span>
+                    </div>
+                    <h3>Essay Writing Guide</h3>
+                    <p style="color: var(--color-text-muted);">Liste mit nützlichen Linking Words für Klausuren.</p>
+                    <button class="btn btn-primary" style="margin-top: auto;"
+                        onclick="downloadMaterial(this, 'materials/englisch_essay.txt')">Herunterladen (10 🪙)</button>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ReLearn</p>
+        </div>
+    </footer>
+
+    <script>
+        function downloadMaterial(btn, fileUrl) {
+            let coins = parseInt(localStorage.getItem('relearn_coins') || '0');
+            if (coins >= 10) {
+                coins -= 10;
+                localStorage.setItem('relearn_coins', coins);
+
+                // Create temporary link to trigger download
+                const link = document.createElement('a');
+                link.href = fileUrl;
+                link.setAttribute('download', '');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Visual Feedback
+                btn.textContent = 'Heruntergeladen ✓';
+                btn.disabled = true;
+                btn.style.backgroundColor = '#4CAF50';
+                btn.style.borderColor = '#4CAF50';
+            } else {
+                if (confirm('Nicht genug Münzen! Du hast ' + coins + '. Du brauchst 10.\nMöchtest du Münzen sammeln spielen?')) {
+                    window.location.href = 'game.html';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

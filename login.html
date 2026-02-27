@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="buddy.html">Study Buddy</a></li>
+                    <li><a href="game.html">Coin Game</a></li>
+                    <li><a href="login.html" class="active btn btn-login"
+                            style="padding: 1rem 2rem; font-size: 1.2rem;">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container flex-center flex-col animate-fade" style="padding: 4rem 0;">
+        <h1 style="margin-bottom: 2rem;">Wähle deinen Zugang</h1>
+
+        <div class="flex-row gap-3" style="flex-wrap: wrap; justify-content: center;">
+            <!-- Student Login -->
+            <div class="card flex-col flex-center gap-2" style="width: 300px; padding: 3rem; text-align: center;">
+                <div style="font-size: 4rem;">🎓</div>
+                <h2>Schüler</h2>
+                <p style="color: var(--color-text-muted);">Lerne, Schau Videos und sammle Coins.</p>
+                <form onsubmit="event.preventDefault(); window.location.href='student-dashboard.html';"
+                    class="flex-col gap-1" style="width: 100%;">
+                    <input type="text" placeholder="Benutzername" class="search-input"
+                        style="padding: 0.8rem; border-radius: 8px;" required>
+                    <input type="password" placeholder="Passwort" class="search-input"
+                        style="padding: 0.8rem; border-radius: 8px;" required>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login als Schüler</button>
+                </form>
+            </div>
+
+            <!-- Teacher Login -->
+            <div class="card flex-col flex-center gap-2" style="width: 300px; padding: 3rem; text-align: center;">
+                <div style="font-size: 4rem;">👨‍🏫</div>
+                <h2>Lehrer / Dozent</h2>
+                <p style="color: var(--color-text-muted);">Erstelle Inhalte, gehe Live und hilf Schülern.</p>
+                <form onsubmit="event.preventDefault(); window.location.href='teacher-dashboard.html';"
+                    class="flex-col gap-1" style="width: 100%;">
+                    <input type="text" placeholder="Benutzername" class="search-input"
+                        style="padding: 0.8rem; border-radius: 8px;" required>
+                    <input type="password" placeholder="Passwort" class="search-input"
+                        style="padding: 0.8rem; border-radius: 8px;" required>
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; background-color: var(--color-text-main); color: var(--color-bg);">Login als
+                        Lehrer</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ReLearn</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <div class="flex-row gap-2" style="align-items: center;">
+                <span class="btn" id="coinDisplay"
+                    style="padding: 0.5rem 1rem; font-size: 0.9rem; pointer-events: none;">🪙 150 Coins</span>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="student-dashboard.html">Zurück</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container animate-fade" style="padding: 2rem 0;">
+        <div class="flex-row gap-3" style="align-items: flex-start; flex-wrap: wrap;">
+
+            <!-- Video Player (Left/Top) -->
+            <div style="flex: 2; min-width: 300px;">
+                <div class="video-container">
+                    <div class="live-badge">LIVE</div>
+                    <div class="stream-placeholder">
+                        <div style="font-size: 4rem;">▶</div>
+                        <p style="font-weight: 600; margin-top: 1rem;">Stream Simulation</p>
+                    </div>
+                </div>
+                <div class="flex-between" style="margin-top: 1.5rem;">
+                    <div>
+                        <h1 style="font-size: 1.8rem;">Mathe: Q&A zur Klausurvorbereitung</h1>
+                        <p style="color: var(--color-text-muted); margin-top: 0.5rem;">Herr Müller • 120 Zuschauer</p>
+                    </div>
+                </div>
+
+                <!-- Donation Section -->
+                <div class="card" style="margin-top: 2rem;">
+                    <h3>Unterstütze den Lehrer</h3>
+                    <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Sende Coins als Dankeschön für den
+                        Unterricht.</p>
+                    <div class="flex-row gap-2" style="align-items: center;">
+                        <input type="number" id="donationAmount" min="1" max="1000" placeholder="Menge (1-1000)"
+                            class="search-input" style="width: 200px;">
+                        <button class="btn btn-primary" onclick="donateCoins()">🪙 Spenden</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat (Right/Bottom) -->
+            <div class="card chat-container" style="flex: 1; min-width: 300px;">
+                <h3 style="border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem;">
+                    Live Chat</h3>
+
+                <div id="chatMessages" class="chat-messages">
+                    <div class="chat-msg"><strong>Anna</strong>Wann kommt das Thema Ableitungen?</div>
+                    <div class="chat-msg"><strong>Max</strong>Das hatten wir schon am Anfang.</div>
+                    <div class="chat-msg" style="background: #f0f0f0;"><strong>Lehrer-Bot</strong>Willkommen im Stream!
+                        👋</div>
+                </div>
+
+                <div class="flex-row gap-1">
+                    <input type="text" placeholder="Nachricht..." class="search-input">
+                    <button class="btn btn-primary" style="padding: 0 1.5rem;">➤</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function donateCoins() {
+            const input = document.getElementById('donationAmount');
+            const amount = parseInt(input.value);
+            const coinDisplay = document.getElementById('coinDisplay');
+
+            // Simulating stored coins
+            let currentCoins = 150;
+
+            if (isNaN(amount) || amount < 1 || amount > 1000) {
+                alert('Bitte gib einen Betrag zwischen 1 und 1000 Coins ein.');
+                return;
+            }
+
+            if (amount > currentCoins) {
+                alert('Nicht genug Coins! Du hast nur ' + currentCoins + '.');
+                return;
+            }
+
+            currentCoins -= amount;
+            coinDisplay.textContent = '🪙 ' + currentCoins + ' Coins';
+
+            // Add system message to chat
+            const chatBox = document.getElementById('chatMessages');
+            const msg = document.createElement('div');
+            msg.innerHTML = '<span style="color: gold; font-weight: bold;">SYSTEM:</span> Du hast ' + amount + ' Coins gespendet! Danke! 🎉';
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            input.value = '';
+            alert('Danke für deine Spende von ' + amount + ' Coins!');
+        }
+    </script>
+</body>
+
+</html>

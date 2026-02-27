@@ -1,0 +1,12 @@
+# Zusammenfassung Mathe - Analysis
+
+1. Ableitungsregeln
+   - Potenzregel: f(x) = x^n -> f'(x) = n*x^(n-1)
+   - Summenregel: f(x) = u(x) + v(x) -> f'(x) = u'(x) + v'(x)
+   - Produktregel: f(x) = u*v -> u'v + uv'
+
+2. Extremstellen
+   - Notwendige Bedingung: f'(x) = 0
+   - Hinreichende Bedingung: f''(x) != 0
+
+Viel Erfolg bei der Klausur!

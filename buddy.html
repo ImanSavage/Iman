@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="buddy.html" class="active">Study Buddy</a></li>
+                    <li><a href="game.html">Coin Game</a></li>
+                    <li><a href="login.html" class="btn btn-login"
+                            style="padding: 1rem 2rem; font-size: 1.2rem;">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container flex-center flex-col" style="padding: 2rem 0;">
+
+        <div class="buddy-container animate-fade">
+
+            <div class="buddy-card" id="buddyCard">
+                <!-- Profile Image Placeholder (Monochrome) -->
+                <div class="buddy-image" style="background: #e5e5e5; color: black;">
+                    <div id="buddyIcon" style="font-size: 5rem; filter: grayscale(100%);">🎓</div>
+                </div>
+
+                <div class="buddy-info">
+                    <h2 id="buddyName">Laden...</h2>
+                    <div class="flex-row gap-1" style="margin-top: 0.5rem;" id="buddyTags">
+                        <!-- Tags inserted here -->
+                    </div>
+                    <p style="margin-top: 1rem; color: black;" id="buddyBio">Lade Profile...</p>
+                </div>
+            </div>
+
+            <div class="action-buttons flex-center gap-3">
+                <button class="action-btn btn-pass" onclick="nextProfile()">✕</button>
+                <button class="action-btn btn-match" onclick="matchProfile()">♥</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        const profiles = [
+            {
+                name: "Sarah, 12 FowF",
+                tags: ["Mathe", "Chemie"],
+                bio: "Suche jemanden für die Chemie-Klausur nächste Woche! Ich kann gut Mathe erklären.",
+                icon: "👩‍🎓"
+            },
+            {
+                name: "Jonas, 11 FowT",
+                tags: ["Physik", "Informatik"],
+                bio: "Programmiere gerne und brauche Hilfe in Mechanik. Zocke auch gerne mal.",
+                icon: "👨‍💻"
+            },
+            {
+                name: "Emily, 13 Gym",
+                tags: ["Englisch", "Geschichte"],
+                bio: "Bereite mich aufs Abi vor. Suche Lerngruppe für Geschichte LK.",
+                icon: "📚"
+            },
+            {
+                name: "Mehmet, 10 Real",
+                tags: ["Sport", "Biologie"],
+                bio: "Bio ist mein Lieblingsfach! Suche Buddy für Referat über Genetik.",
+                icon: "🔬"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function loadProfile(index) {
+            const profile = profiles[index % profiles.length];
+            document.getElementById('buddyName').textContent = profile.name;
+            document.getElementById('buddyBio').textContent = `"${profile.bio}"`;
+            document.getElementById('buddyIcon').textContent = profile.icon;
+
+            const tagContainer = document.getElementById('buddyTags');
+            tagContainer.innerHTML = '';
+            profile.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'tag';
+                span.textContent = tag;
+                // Add some random coloring logic or class based on tag content if needed
+                // For now, strict monochrome
+                span.style.background = 'white';
+                span.style.color = 'black';
+                span.style.border = '1px solid black';
+                tagContainer.appendChild(span);
+            });
+
+            // Animation reset (simple)
+            const card = document.getElementById('buddyCard');
+            card.classList.remove('animate-fade');
+            void card.offsetWidth; // trigger reflow
+            card.classList.add('animate-fade');
+        }
+
+        function nextProfile() {
+            currentIndex++;
+            loadProfile(currentIndex);
+        }
+
+        function matchProfile() {
+            alert(`It's a Match! Du hast dich mit ${profiles[currentIndex % profiles.length].name} verbunden.`);
+            nextProfile();
+        }
+
+        // Init
+        loadProfile(0);
+    </script>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ReLearn</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

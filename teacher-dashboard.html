@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lehrer Dashboard - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="buddy.html">Study Buddy</a></li>
+                    <li><a href="game.html">Coin Game</a></li>
+                    <li><a href="teacher-dashboard.html" class="active btn btn-login"
+                            style="padding: 1rem 2rem; font-size: 1.2rem;">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container animate-fade" style="padding: 2rem 0;">
+        <h1 style="margin-bottom: 2rem;">Willkommen, Herr Müller 👋</h1>
+
+        <div class="flex-row gap-3" style="flex-wrap: wrap;">
+            <!-- Go Live Card -->
+            <div class="card flex-col flex-center gap-2"
+                style="flex: 1; min-width: 300px; padding: 3rem; text-align: center; border: 2px dashed var(--color-text-main);">
+                <div style="font-size: 3rem;">🔴</div>
+                <h2>Live Gehen</h2>
+                <p style="color: var(--color-text-muted);">Starte eine Live-Session für deine Schüler.</p>
+                <button class="btn btn-primary btn-large" onclick="alert('Live-Stream gestartet! (Simulation)')">Jetzt
+                    Streamen</button>
+            </div>
+
+            <!-- Upload Video Card -->
+            <div class="card flex-col flex-center gap-2"
+                style="flex: 1; min-width: 300px; padding: 3rem; text-align: center;">
+                <div style="font-size: 3rem;">📹</div>
+                <h2>Video Hochladen</h2>
+                <p style="color: var(--color-text-muted);">Lade eine neue aufgezeichnete Lektion hoch.</p>
+                <button class="btn"
+                    style="background-color: var(--color-surface); border: 1px solid var(--color-border);"
+                    onclick="alert('Upload-Fenster geöffnet! (Simulation)')">Upload starten</button>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 3rem; margin-bottom: 1.5rem;">Deine letzten Aktivitäten</h2>
+        <div class="card">
+            <ul class="menu-list">
+                <li><a href="#">Mathe 10a: Vektorrechnung (Live - Gestern)</a></li>
+                <li><a href="#">Chemie 9b: Periodensystem (Upload - Vor 2 Tagen)</a></li>
+                <li><a href="#">Physik 11: Mechanik Grundlagen (Live - Vor 3 Tagen)</a></li>
+            </ul>
+        </div>
+    </main>
+</body>
+
+</html>

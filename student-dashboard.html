@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schüler Dashboard - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <div class="flex-row gap-2" style="align-items: center;">
+                <span class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem; pointer-events: none;">🪙 150
+                    Coins</span>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="material.html">Lernmaterial</a></li>
+                        <li><a href="forum.html">Forum</a></li>
+                        <li><a href="buddy.html">Study Buddy</a></li>
+                        <li><a href="game.html">Coin Game</a></li>
+                        <li><a href="student-dashboard.html" class="active btn btn-login"
+                                style="padding: 1rem 2rem; font-size: 1.2rem;">Dashboard</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container animate-fade" style="padding: 2rem 0;">
+        <h1 style="margin-bottom: 2rem;">Hallo, Iman 👋</h1>
+
+        <!-- Live Now Section -->
+        <section style="margin-bottom: 3rem;">
+            <div class="flex-between" style="margin-bottom: 1rem;">
+                <h2 style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span
+                        style="height: 10px; width: 10px; background-color: red; border-radius: 50%; display: inline-block;"></span>
+                    Live Jetzt
+                </h2>
+            </div>
+
+            <div class="flex-row gap-2" style="flex-wrap: wrap;">
+                <article class="card flex-col gap-1" style="flex: 1; min-width: 300px;">
+                    <div
+                        style="height: 150px; background-color: #000; display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px;">
+                        ▶ Live Vorschau
+                    </div>
+                    <div class="flex-between" style="margin-top: 0.5rem;">
+                        <span class="tag tag-math">Mathe</span>
+                        <span style="color: red; font-weight: bold;">🔴 LIVE</span>
+                    </div>
+                    <h3>Q&A zur Klausurvorbereitung</h3>
+                    <p style="color: var(--color-text-muted);">Herr Müller • 10. Klasse</p>
+                    <a href="stream-view.html" class="btn btn-primary" style="margin-top: auto;">Beitreten</a>
+                </article>
+
+                <article class="card flex-col gap-1" style="flex: 1; min-width: 300px;">
+                    <div
+                        style="height: 150px; background-color: #000; display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px;">
+                        ▶ Live Vorschau
+                    </div>
+                    <div class="flex-between" style="margin-top: 0.5rem;">
+                        <span class="tag tag-history">Geschichte</span>
+                        <span style="color: red; font-weight: bold;">🔴 LIVE</span>
+                    </div>
+                    <h3>Weimarer Republik</h3>
+                    <p style="color: var(--color-text-muted);">Frau Schmidt • 11. Klasse</p>
+                    <a href="stream-view.html" class="btn btn-primary" style="margin-top: auto;">Beitreten</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Recent Videos Section -->
+        <section>
+            <h2 style="margin-bottom: 1.5rem;">Neue Videos</h2>
+            <div class="flex-row gap-2" style="flex-wrap: wrap;">
+                <article class="card flex-col gap-1" style="flex: 1; min-width: 250px;">
+                    <div
+                        style="height: 120px; background-color: var(--color-surface); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                        📼 Video
+                    </div>
+                    <h3>Chemische Bindungen</h3>
+                    <p style="color: var(--color-text-muted);">Dr. Weber • 25 Min.</p>
+                    <button class="btn" style="border: 1px solid var(--color-border);">Ansehen</button>
+                </article>
+                <article class="card flex-col gap-1" style="flex: 1; min-width: 250px;">
+                    <div
+                        style="height: 120px; background-color: var(--color-surface); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                        📼 Video
+                    </div>
+                    <h3>English Tenses Recap</h3>
+                    <p style="color: var(--color-text-muted);">Mrs. Jones • 15 Min.</p>
+                    <button class="btn" style="border: 1px solid var(--color-border);">Ansehen</button>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

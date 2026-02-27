@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Runner - ReLearn</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="Image.png" alt="Logo" class="site-logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="buddy.html">Study Buddy</a></li>
+                    <li><a href="game.html" class="active">Coin Game</a></li>
+                    <li><a href="login.html" class="btn btn-login"
+                            style="padding: 1rem 2rem; font-size: 1.2rem;">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 2rem 0;">
+        <div class="game-info animate-fade">
+            <h1>Coin Runner</h1>
+            <p>Sammle Münzen, um Lernmaterialien freizuschalten! (Kosten: 10 Münzen pro Download)</p>
+
+            <div style="margin-top: 1rem;">
+                <div class="coin-display">
+                    <span>🪙</span> <span id="coinCount">0</span>
+                </div>
+            </div>
+            <p class="controls-hint">Drücke <strong>LEERTASTE</strong> oder <strong>KLICKE</strong> um zu springen.</p>
+        </div>
+
+        <div class="canvas-wrapper animate-fade">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+            <div id="startScreen">
+                <h2>Bist du bereit?</h2>
+                <p>Weiche den roten Hindernissen aus und sammle so viele Münzen wie möglich!</p>
+                <div class="flex-center">
+                    <button class="btn btn-primary btn-large" onclick="startGame()">Start Game ▶</button>
+                </div>
+            </div>
+
+            <div id="gameOverScreen">
+                <h2>Game Over!</h2>
+                <p style="margin: 1rem 0;">Gesammelte Münzen in dieser Runde: <span id="roundCoins">0</span></p>
+                <button class="btn btn-primary" onclick="startGame()">Nochmal spielen</button>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 1rem; color: var(--color-text-muted);">
+            Highscore: <span id="highScoreDisplay">0</span>
+        </p>
+
+        <div class="leaderboard-container animate-fade"
+            style="margin-top: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">🏆 Rangliste 🏆</h2>
+            <div class="leaderboard-card">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rang</th>
+                            <th>Name</th>
+                            <th>Punkte</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rank-1">
+                            <td>🥇 1</td>
+                            <td>Iman</td>
+                            <td>10020</td>
+                        </tr>
+                        <tr class="rank-2">
+                            <td>🥈 2</td>
+                            <td>Ineas</td>
+                            <td>8000</td>
+                        </tr>
+                        <tr class="rank-3">
+                            <td>🥉 3</td>
+                            <td>Isabel & Sude</td>
+                            <td>7666</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ReLearn</p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const coinDisplay = document.getElementById('coinCount');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const startScreen = document.getElementById('startScreen');
+        const roundCoinsDisplay = document.getElementById('roundCoins');
+        const highScoreDisplay = document.getElementById('highScoreDisplay');
+
+        // Game State
+        let gameRunning = false;
+        let animationId;
+        let score = 0;
+        let totalCoins = parseInt(localStorage.getItem('relearn_coins') || '0');
+        let highScore = parseInt(localStorage.getItem('relearn_highscore') || '0');
+        let roundCoins = 0;
+        let frame = 0;
+
+        // Difficulty Settings
+        let baseSpeed = 5;
+        let gameSpeed = baseSpeed;
+        let difficultyLevel = 1;
+
+        // Player
+        const player = {
+            x: 50,
+            y: 300,
+            width: 40,
+            height: 40,
+            dy: 0,
+            jumpForce: 14,    // Higher jump
+            gravity: 0.6,     // Lower gravity for floatier jump
+            grounded: false,
+            color: '#000000',
+            originalColor: '#000000'
+        };
+
+        // Constants
+        const GROUND_HEIGHT = 50;
+        const CANVAS_HEIGHT = 400;
+        const GROUND_Y = CANVAS_HEIGHT - GROUND_HEIGHT;
+
+        // Arrays
+        let obstacles = [];
+        let coins = [];
+
+        // Update initial display
+        coinDisplay.textContent = totalCoins;
+        highScoreDisplay.textContent = highScore;
+
+        // Draw initial state
+        drawGame();
+
+        function startGame() {
+            if (gameRunning) return;
+
+            // UI Updates
+            startScreen.style.display = 'none';
+            gameOverScreen.style.display = 'none';
+
+            // Reset
+            gameRunning = true;
+            obstacles = [];
+            coins = [];
+            roundCoins = 0;
+            score = 0;
+            frame = 0;
+            gameSpeed = baseSpeed;
+            difficultyLevel = 1;
+
+            player.y = GROUND_Y - player.height;
+            player.dy = 0;
+            player.color = player.originalColor;
+
+            animate();
+        }
+
+        function jump() {
+            if (player.grounded) {
+                player.dy = -player.jumpForce;
+                player.grounded = false;
+            }
+        }
+
+        // Input Handling
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault(); // Prevent scrolling
+                // Only jump if game is running
+                if (gameRunning) jump();
+            }
+        });
+
+        canvas.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            // Only jump if game is running
+            if (gameRunning) jump();
+        });
+
+        // Touch support for mobile
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent scrolling
+            if (gameRunning) jump();
+        }, { passive: false });
+
+        class Obstacle {
+            constructor() {
+                this.width = 30 + Math.random() * 20;
+                this.height = 40 + Math.random() * 40; // Taller obstacles
+                this.x = canvas.width;
+                this.y = GROUND_Y - this.height;
+                this.markedForDeletion = false;
+            }
+            update() {
+                this.x -= gameSpeed;
+                if (this.x + this.width < 0) this.markedForDeletion = true;
+            }
+            draw() {
+                ctx.fillStyle = '#FF0000';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(this.x, this.y, this.width, this.height);
+
+                // Add a "danger" symbol or pattern
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x + this.width, this.y + this.height);
+                ctx.moveTo(this.x + this.width, this.y);
+                ctx.lineTo(this.x, this.y + this.height);
+                ctx.stroke();
+            }
+        }
+
+        class Coin {
+            constructor() {
+                this.size = 15; // Bigger coins
+                this.x = canvas.width;
+
+                // Spawn heights logic
+                const minHeight = GROUND_Y - 150; // Max jump height approx
+                const maxHeight = GROUND_Y - 30;  // Near ground
+                this.y = Math.random() * (maxHeight - minHeight) + minHeight;
+
+                this.markedForDeletion = false;
+
+                // Bobbing animation
+                this.bobOffset = Math.random() * Math.PI * 2;
+            }
+            update() {
+                this.x -= gameSpeed;
+                this.y += Math.sin(frame * 0.1 + this.bobOffset) * 0.5; // Gentle floating
+
+                if (this.x + this.size < 0) this.markedForDeletion = true;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'gold';
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#DAA520';
+                ctx.stroke();
+
+                // Shine effect
+                ctx.fillStyle = 'rgba(255,255,255,0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x - 5, this.y - 5, 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 12px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('$', this.x, this.y);
+            }
+        }
+
+        function drawGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Background
+            ctx.fillStyle = '#f9f9f9';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Grid lines for "Math notebook" feel
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (let x = 0; x < canvas.width; x += 20) { ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); }
+            for (let y = 0; y < canvas.height; y += 20) { ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); }
+            ctx.stroke();
+
+            // Ground Line
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, GROUND_Y, canvas.width, GROUND_HEIGHT);
+
+            // Score Display in-game
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.font = 'bold 80px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(Math.floor(score).toString(), canvas.width / 2, CANVAS_HEIGHT / 2);
+
+            // Player
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            // Player eyes (just for fun)
+            ctx.fillStyle = 'white';
+            ctx.fillRect(player.x + 25, player.y + 10, 8, 8);
+
+            // Objects
+            obstacles.forEach(o => o.draw());
+            coins.forEach(c => c.draw());
+
+            // UI Top Right
+            ctx.fillStyle = 'black';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText(`Diff: ${difficultyLevel} | Speed: ${gameSpeed.toFixed(1)}`, canvas.width - 20, 25);
+
+            // Instruction removed since we have Start Button
+        }
+
+        function animate() {
+            if (!gameRunning) return;
+
+            // Physics
+            player.dy += player.gravity;
+            player.y += player.dy;
+
+            // Ground Collision
+            if (player.y + player.height > GROUND_Y) {
+                player.y = GROUND_Y - player.height;
+                player.dy = 0;
+                player.grounded = true;
+            } else {
+                player.grounded = false;
+            }
+
+            // Game Logic & Difficulty
+            frame++;
+            score += 0.05 * gameSpeed; // Score based on survival and speed
+
+            // Increase speed every 500 frames (approx 8 seconds)
+            if (frame % 500 === 0) {
+                gameSpeed += 0.5;
+                difficultyLevel++;
+            }
+
+            // Cap speed
+            if (gameSpeed > 15) gameSpeed = 15;
+
+            // Spawning Logic
+            // As speed increases, spawn rate should increase slightly differently
+            // Initial spawn check: 100 frames / speed (e.g., 20 frames at start)
+            // We want obstacles to not be impossible. 
+            let minObstacleDistance = 300; // Minimum pixels between obstacles
+            let lastObstacle = obstacles[obstacles.length - 1];
+            let canSpawnObstacle = !lastObstacle || (canvas.width - lastObstacle.x > minObstacleDistance);
+
+            if (canSpawnObstacle) {
+                // Random chance based on speed
+                if (Math.random() < 0.02 + (gameSpeed * 0.001)) {
+                    obstacles.push(new Obstacle());
+                }
+            }
+
+            // Coins spawn independently
+            if (frame % 40 === 0) { // Regular intervals
+                if (Math.random() > 0.5) coins.push(new Coin());
+            }
+
+            // Update Objects
+            [...obstacles, ...coins].forEach(obj => obj.update());
+            obstacles = obstacles.filter(o => !o.markedForDeletion);
+            coins = coins.filter(c => !c.markedForDeletion);
+
+            // Collisions
+            checkCollisions();
+
+            drawGame();
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function checkCollisions() {
+            // Player Hitbox (slightly smaller than visual to be forgiving)
+            const pHit = {
+                x: player.x + 5,
+                y: player.y + 5,
+                w: player.width - 10,
+                h: player.height - 10
+            };
+
+            // Obstacles
+            for (let obs of obstacles) {
+                // Obstacle Hitbox
+                const oHit = {
+                    x: obs.x + 2,
+                    y: obs.y + 2,
+                    w: obs.width - 4,
+                    h: obs.height - 4
+                };
+
+                if (
+                    pHit.x < oHit.x + oHit.w &&
+                    pHit.x + pHit.w > oHit.x &&
+                    pHit.y < oHit.y + oHit.h &&
+                    pHit.y + pHit.h > oHit.y
+                ) {
+                    gameOver();
+                    return;
+                }
+            }
+
+            // Coins
+            for (let coin of coins) {
+                if (!coin.markedForDeletion) {
+                    // Circle-Rectangle Collision for better feel
+                    // Find closest point on player rect to circle center
+                    let testX = coin.x;
+                    let testY = coin.y;
+
+                    if (coin.x < player.x) testX = player.x;
+                    else if (coin.x > player.x + player.width) testX = player.x + player.width;
+
+                    if (coin.y < player.y) testY = player.y;
+                    else if (coin.y > player.y + player.height) testY = player.y + player.height;
+
+                    let distX = coin.x - testX;
+                    let distY = coin.y - testY;
+                    let distance = Math.sqrt((distX * distX) + (distY * distY));
+
+                    if (distance <= coin.size) {
+                        collectCoin(coin);
+                    }
+                }
+            }
+        }
+
+        function collectCoin(coin) {
+            coin.markedForDeletion = true;
+            roundCoins++;
+            totalCoins++;
+            coinDisplay.textContent = totalCoins;
+            localStorage.setItem('relearn_coins', totalCoins);
+
+            // Visual feedback text could be added here if we had a proper system for particles
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            cancelAnimationFrame(animationId);
+            gameOverScreen.style.display = 'block';
+            roundCoinsDisplay.textContent = roundCoins;
+
+            if (Math.floor(score) > highScore) {
+                highScore = Math.floor(score);
+                localStorage.setItem('relearn_highscore', highScore);
+                highScoreDisplay.textContent = highScore;
+            }
+        }
+    </script>
+</body>
+
+</html>
