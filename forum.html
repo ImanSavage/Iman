@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -17,8 +17,8 @@
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html">Startseite</a></li>
-                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="material.html">Materials</a></li>
                     <li><a href="forum.html" class="active">Forum</a></li>
                     <li><a href="buddy.html">Study Buddy</a></li>
                     <li><a href="game.html">Coin Game</a></li>
@@ -33,21 +33,21 @@
 
         <div class="flex-between" style="margin-bottom: 2rem;">
             <h1>Community Forum</h1>
-            <button class="btn btn-primary" onclick="askQuestion()">+ Frage stellen (5 🪙)</button>
+            <button class="btn btn-primary" onclick="askQuestion()">+ Ask a Question (5 🪙)</button>
         </div>
 
         <div class="forum-layout">
 
             <!-- Sidebar -->
             <aside class="sidebar">
-                <h3 style="margin-bottom: 1rem;">Themen</h3>
+                <h3 style="margin-bottom: 1rem;">Topics</h3>
                 <ul class="menu-list">
-                    <li><a href="#" class="active">Alle Themen</a></li>
-                    <li><a href="#">Mathematik</a></li>
-                    <li><a href="#">Sprachen</a></li>
-                    <li><a href="#">Naturwissenschaften</a></li>
-                    <li><a href="#">Geschichte & Politik</a></li>
-                    <li><a href="#">Sonstiges</a></li>
+                    <li><a href="#" class="active">All Topics</a></li>
+                    <li><a href="#">Mathematics</a></li>
+                    <li><a href="#">Languages</a></li>
+                    <li><a href="#">Sciences</a></li>
+                    <li><a href="#">History & Politics</a></li>
+                    <li><a href="#">Other</a></li>
                 </ul>
             </aside>
 
@@ -61,22 +61,23 @@
                             <div class="user-avatar" style="background: black; color: white;">L</div>
                             <div>
                                 <div style="font-weight: bold;">Lisa Müller</div>
-                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Vor 10 Min.</div>
+                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">10 mins ago</div>
                             </div>
                         </div>
-                        <span class="tag tag-math">Mathe</span>
+                        <span class="tag tag-math">Math</span>
                     </div>
                     <div>
-                        <h3>Hilfe bei Vektorrechnung?</h3>
-                        <p style="color: var(--color-text-muted);">Ich verstehe nicht ganz, wie man den Normalenvektor
-                            einer Ebene berechnet. Kann mir das jemand erklären?</p>
+                        <h3>Help with vector calculus?</h3>
+                        <p style="color: var(--color-text-muted);">I don't quite understand how to calculate the normal
+                            vector
+                            of a plane. Can someone explain it?</p>
                     </div>
                     <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;" class="flex-between">
                         <div class="comment-count">
-                            <span>💬 3 Antworten</span>
+                            <span>💬 3 Replies</span>
                         </div>
                         <button class="btn"
-                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Antworten</button>
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Reply</button>
                     </div>
                 </article>
 
@@ -88,22 +89,22 @@
                             </div>
                             <div>
                                 <div style="font-weight: bold;">Tom Schmidt</div>
-                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Vor 45 Min.</div>
+                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">45 mins ago</div>
                             </div>
                         </div>
-                        <span class="tag tag-lang">Französisch</span>
+                        <span class="tag tag-lang">French</span>
                     </div>
                     <div>
-                        <h3>Subjonctif Bildung</h3>
-                        <p style="color: var(--color-text-muted);">Wann genau benutze ich den Subjonctif nach "espérer"?
-                            Dachte das wäre nur bei Wunsch?</p>
+                        <h3>Subjonctif Formation</h3>
+                        <p style="color: var(--color-text-muted);">When exactly do I use the subjonctif after "espérer"?
+                            I thought it was only for wishes?</p>
                     </div>
                     <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;" class="flex-between">
                         <div class="comment-count">
-                            <span>💬 0 Antworten</span>
+                            <span>💬 0 Replies</span>
                         </div>
                         <button class="btn"
-                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Antworten</button>
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Reply</button>
                     </div>
                 </article>
 
@@ -117,27 +118,24 @@
         </div>
     </footer>
 
-        <script>
-    const COINS_REQUIRED = 5;
-
-    function askQuestion() {
-        let coins = parseInt(localStorage.getItem('relearn_coins') || '0');
-        if (coins >= COINS_REQUIRED) {
-            if (confirm(`Möchtest du ${COINS_REQUIRED} Münzen ausgeben, um eine Frage zu stellen?`)) {
-                coins -= COINS_REQUIRED;
-                localStorage.setItem('relearn_coins', coins);
-                alert(`Frage erfolgreich gepostet! -${COINS_REQUIRED} Münzen. (Verbleibend: ${coins})`);
-                // TODO: Open modal or redirect to question form.
-            }
-        } else {
-            if (confirm(`Nicht genug Münzen! Du hast ${coins}. Du brauchst ${COINS_REQUIRED}.\nMöchtest du Münzen sammeln spielen?`)) {
-                window.location.href = 'game.html';
+    <script>
+        function askQuestion() {
+            let coins = parseInt(localStorage.getItem('relearn_coins') || '0');
+            if (coins >= 5) {
+                if (confirm('Would you like to spend 5 coins to ask a question?')) {
+                    coins -= 5;
+                    localStorage.setItem('relearn_coins', coins);
+                    alert('Question posted successfully! -5 coins. (Remaining: ' + coins + ')');
+                    // In a real app, this would open a modal or redirect to a form.
+                    // For now, we simulate success.
+                }
+            } else {
+                if (confirm('Not enough coins! You have ' + coins + '. You need 5.\nWould you like to play the coin game?')) {
+                    window.location.href = 'game.html';
+                }
             }
         }
-    }
-</script>
-
+    </script>
 </body>
-
 
 </html>
