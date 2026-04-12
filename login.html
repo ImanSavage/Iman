@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -17,8 +17,8 @@
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html">Startseite</a></li>
-                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="material.html">Materials</a></li>
                     <li><a href="forum.html">Forum</a></li>
                     <li><a href="buddy.html">Study Buddy</a></li>
                     <li><a href="game.html">Coin Game</a></li>
@@ -30,38 +30,38 @@
     </header>
 
     <main class="container flex-center flex-col animate-fade" style="padding: 4rem 0;">
-        <h1 style="margin-bottom: 2rem;">Wähle deinen Zugang</h1>
+        <h1 style="margin-bottom: 2rem;">Choose your access</h1>
 
         <div class="flex-row gap-3" style="flex-wrap: wrap; justify-content: center;">
             <!-- Student Login -->
             <div class="card flex-col flex-center gap-2" style="width: 300px; padding: 3rem; text-align: center;">
                 <div style="font-size: 4rem;">🎓</div>
-                <h2>Schüler</h2>
-                <p style="color: var(--color-text-muted);">Lerne, Schau Videos und sammle Coins.</p>
+                <h2>Student</h2>
+                <p style="color: var(--color-text-muted);">Learn, watch videos, and collect coins.</p>
                 <form onsubmit="event.preventDefault(); window.location.href='student-dashboard.html';"
                     class="flex-col gap-1" style="width: 100%;">
-                    <input type="text" placeholder="Benutzername" class="search-input"
+                    <input type="text" placeholder="Username" class="search-input"
                         style="padding: 0.8rem; border-radius: 8px;" required>
-                    <input type="password" placeholder="Passwort" class="search-input"
+                    <input type="password" placeholder="Password" class="search-input"
                         style="padding: 0.8rem; border-radius: 8px;" required>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login als Schüler</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login as Student</button>
                 </form>
             </div>
 
             <!-- Teacher Login -->
             <div class="card flex-col flex-center gap-2" style="width: 300px; padding: 3rem; text-align: center;">
                 <div style="font-size: 4rem;">👨‍🏫</div>
-                <h2>Lehrer / Dozent</h2>
-                <p style="color: var(--color-text-muted);">Erstelle Inhalte, gehe Live und hilf Schülern.</p>
+                <h2>Teacher / Professor</h2>
+                <p style="color: var(--color-text-muted);">Create content, go live, and help students.</p>
                 <form onsubmit="event.preventDefault(); window.location.href='teacher-dashboard.html';"
                     class="flex-col gap-1" style="width: 100%;">
-                    <input type="text" placeholder="Benutzername" class="search-input"
+                    <input type="text" placeholder="Username" class="search-input"
                         style="padding: 0.8rem; border-radius: 8px;" required>
-                    <input type="password" placeholder="Passwort" class="search-input"
+                    <input type="password" placeholder="Password" class="search-input"
                         style="padding: 0.8rem; border-radius: 8px;" required>
                     <button type="submit" class="btn btn-primary"
-                        style="width: 100%; background-color: var(--color-text-main); color: var(--color-bg);">Login als
-                        Lehrer</button>
+                        style="width: 100%; background-color: var(--color-text-main); color: var(--color-bg);">Login as
+                        Teacher</button>
                 </form>
             </div>
         </div>
