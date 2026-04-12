@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html">Main Website</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="material.html">Materials</a></li>
                     <li><a href="forum.html">Forum</a></li>
                     <li><a href="buddy.html" class="active">Study Buddy</a></li>
@@ -44,7 +44,7 @@
                     <div class="flex-row gap-1" style="margin-top: 0.5rem;" id="buddyTags">
                         <!-- Tags inserted here -->
                     </div>
-                    <p style="margin-top: 1rem; color: black;" id="buddyBio">Load Profile...</p>
+                    <p style="margin-top: 1rem; color: black;" id="buddyBio">Loading Profile...</p>
                 </div>
             </div>
 
@@ -62,25 +62,25 @@
             {
                 name: "Sarah, 12 FowF",
                 tags: ["Math", "Chemistry"],
-                bio: "Need someone to learn Chemistry with, i can teach you Maths.",
+                bio: "Looking for someone for the chemistry exam next week! I'm good at explaining math.",
                 icon: "👩‍🎓"
             },
             {
                 name: "Jonas, 11 FowT",
-                tags: ["Physics", "Computer"],
-                bio: "I can Programm, i need someone to teach me Chemistry.",
+                tags: ["Physics", "Computer Science"],
+                bio: "I like coding and need help in mechanics. I also like gaming.",
                 icon: "👨‍💻"
             },
             {
                 name: "Emily, 13 Gym",
                 tags: ["English", "History"],
-                bio: "I am making myself ready for College, can someone help me with English tests?.",
+                bio: "Preparing for final exams. Looking for a study group for advanced history.",
                 icon: "📚"
             },
             {
                 name: "Mehmet, 10 Real",
-                tags: ["Sports", "Biology"],
-                bio: "I love Bio, need someone to teach me how to create a Presentation for Science.",
+                tags: ["PE", "Biology"],
+                bio: "Bio is my favorite subject! Need a buddy for a presentation on genetics.",
                 icon: "🔬"
             }
         ];
@@ -120,7 +120,7 @@
         }
 
         function matchProfile() {
-            alert(`It's a Match! You are now with ${profiles[currentIndex % profiles.length].name} connected.`);
+            alert(`It's a Match! You are now connected with ${profiles[currentIndex % profiles.length].name}.`);
             nextProfile();
         }
 
