@@ -17,8 +17,8 @@
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html">Startseite</a></li>
-                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="index.html">Main Website</a></li>
+                    <li><a href="material.html">Materials</a></li>
                     <li><a href="forum.html">Forum</a></li>
                     <li><a href="buddy.html" class="active">Study Buddy</a></li>
                     <li><a href="game.html">Coin Game</a></li>
@@ -40,11 +40,11 @@
                 </div>
 
                 <div class="buddy-info">
-                    <h2 id="buddyName">Laden...</h2>
+                    <h2 id="buddyName">Loading...</h2>
                     <div class="flex-row gap-1" style="margin-top: 0.5rem;" id="buddyTags">
                         <!-- Tags inserted here -->
                     </div>
-                    <p style="margin-top: 1rem; color: black;" id="buddyBio">Lade Profile...</p>
+                    <p style="margin-top: 1rem; color: black;" id="buddyBio">Load Profile...</p>
                 </div>
             </div>
 
@@ -61,26 +61,26 @@
         const profiles = [
             {
                 name: "Sarah, 12 FowF",
-                tags: ["Mathe", "Chemie"],
-                bio: "Suche jemanden für die Chemie-Klausur nächste Woche! Ich kann gut Mathe erklären.",
+                tags: ["Math", "Chemistry"],
+                bio: "Need someone to learn Chemistry with, i can teach you Maths.",
                 icon: "👩‍🎓"
             },
             {
                 name: "Jonas, 11 FowT",
-                tags: ["Physik", "Informatik"],
-                bio: "Programmiere gerne und brauche Hilfe in Mechanik. Zocke auch gerne mal.",
+                tags: ["Physics", "Computer"],
+                bio: "I can Programm, i need someone to teach me Chemistry.",
                 icon: "👨‍💻"
             },
             {
                 name: "Emily, 13 Gym",
-                tags: ["Englisch", "Geschichte"],
-                bio: "Bereite mich aufs Abi vor. Suche Lerngruppe für Geschichte LK.",
+                tags: ["English", "History"],
+                bio: "I am making myself ready for College, can someone help me with English tests?.",
                 icon: "📚"
             },
             {
                 name: "Mehmet, 10 Real",
-                tags: ["Sport", "Biologie"],
-                bio: "Bio ist mein Lieblingsfach! Suche Buddy für Referat über Genetik.",
+                tags: ["Sports", "Biology"],
+                bio: "I love Bio, need someone to teach me how to create a Presentation for Science.",
                 icon: "🔬"
             }
         ];
@@ -120,7 +120,7 @@
         }
 
         function matchProfile() {
-            alert(`It's a Match! Du hast dich mit ${profiles[currentIndex % profiles.length].name} verbunden.`);
+            alert(`It's a Match! You are now with ${profiles[currentIndex % profiles.length].name} connected.`);
             nextProfile();
         }
 
