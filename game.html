@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -18,8 +18,8 @@
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html">Startseite</a></li>
-                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="material.html">Materials</a></li>
                     <li><a href="forum.html">Forum</a></li>
                     <li><a href="buddy.html">Study Buddy</a></li>
                     <li><a href="game.html" class="active">Coin Game</a></li>
@@ -33,22 +33,22 @@
     <main class="container" style="padding: 2rem 0;">
         <div class="game-info animate-fade">
             <h1>Coin Runner</h1>
-            <p>Sammle Münzen, um Lernmaterialien freizuschalten! (Kosten: 10 Münzen pro Download)</p>
+            <p>Collect coins to unlock learning materials! (Cost: 10 coins per download)</p>
 
             <div style="margin-top: 1rem;">
                 <div class="coin-display">
                     <span>🪙</span> <span id="coinCount">0</span>
                 </div>
             </div>
-            <p class="controls-hint">Drücke <strong>LEERTASTE</strong> oder <strong>KLICKE</strong> um zu springen.</p>
+            <p class="controls-hint">Press <strong>SPACE</strong> or <strong>CLICK</strong> to jump.</p>
         </div>
 
         <div class="canvas-wrapper animate-fade">
             <canvas id="gameCanvas" width="800" height="400"></canvas>
 
             <div id="startScreen">
-                <h2>Bist du bereit?</h2>
-                <p>Weiche den roten Hindernissen aus und sammle so viele Münzen wie möglich!</p>
+                <h2>Are you ready?</h2>
+                <p>Dodge the red obstacles and collect as many coins as possible!</p>
                 <div class="flex-center">
                     <button class="btn btn-primary btn-large" onclick="startGame()">Start Game ▶</button>
                 </div>
@@ -56,8 +56,8 @@
 
             <div id="gameOverScreen">
                 <h2>Game Over!</h2>
-                <p style="margin: 1rem 0;">Gesammelte Münzen in dieser Runde: <span id="roundCoins">0</span></p>
-                <button class="btn btn-primary" onclick="startGame()">Nochmal spielen</button>
+                <p style="margin: 1rem 0;">Coins collected this round: <span id="roundCoins">0</span></p>
+                <button class="btn btn-primary" onclick="startGame()">Play Again</button>
             </div>
         </div>
 
@@ -67,14 +67,14 @@
 
         <div class="leaderboard-container animate-fade"
             style="margin-top: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-            <h2 style="text-align: center; margin-bottom: 1.5rem;">🏆 Rangliste 🏆</h2>
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">🏆 Leaderboard 🏆</h2>
             <div class="leaderboard-card">
                 <table class="leaderboard-table">
                     <thead>
                         <tr>
-                            <th>Rang</th>
+                            <th>Rank</th>
                             <th>Name</th>
-                            <th>Punkte</th>
+                            <th>Points</th>
                         </tr>
                     </thead>
                     <tbody>
