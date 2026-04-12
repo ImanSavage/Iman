@@ -17,8 +17,8 @@
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.html">Startseite</a></li>
-                    <li><a href="material.html">Lernmaterial</a></li>
+                    <li><a href="index.html">Main Website</a></li>
+                    <li><a href="material.html">Materials</a></li>
                     <li><a href="forum.html" class="active">Forum</a></li>
                     <li><a href="buddy.html">Study Buddy</a></li>
                     <li><a href="game.html">Coin Game</a></li>
@@ -33,21 +33,21 @@
 
         <div class="flex-between" style="margin-bottom: 2rem;">
             <h1>Community Forum</h1>
-            <button class="btn btn-primary" onclick="askQuestion()">+ Frage stellen (5 🪙)</button>
+            <button class="btn btn-primary" onclick="askQuestion()">+ Questioning (5 🪙)</button>
         </div>
 
         <div class="forum-layout">
 
             <!-- Sidebar -->
             <aside class="sidebar">
-                <h3 style="margin-bottom: 1rem;">Themen</h3>
+                <h3 style="margin-bottom: 1rem;">Subjects</h3>
                 <ul class="menu-list">
-                    <li><a href="#" class="active">Alle Themen</a></li>
-                    <li><a href="#">Mathematik</a></li>
-                    <li><a href="#">Sprachen</a></li>
-                    <li><a href="#">Naturwissenschaften</a></li>
-                    <li><a href="#">Geschichte & Politik</a></li>
-                    <li><a href="#">Sonstiges</a></li>
+                    <li><a href="#" class="active">All Subjects</a></li>
+                    <li><a href="#">Maths</a></li>
+                    <li><a href="#">Languege</a></li>
+                    <li><a href="#">Science</a></li>
+                    <li><a href="#">History & Policy</a></li>
+                    <li><a href="#">Others</a></li>
                 </ul>
             </aside>
 
@@ -61,19 +61,18 @@
                             <div class="user-avatar" style="background: black; color: white;">L</div>
                             <div>
                                 <div style="font-weight: bold;">Lisa Müller</div>
-                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Vor 10 Min.</div>
+                                <div style="font-size: 0.8rem; color: var(--color-text-muted);"> 10 Min ago.</div>
                             </div>
                         </div>
-                        <span class="tag tag-math">Mathe</span>
+                        <span class="tag tag-math">Math</span>
                     </div>
                     <div>
-                        <h3>Hilfe bei Vektorrechnung?</h3>
-                        <p style="color: var(--color-text-muted);">Ich verstehe nicht ganz, wie man den Normalenvektor
-                            einer Ebene berechnet. Kann mir das jemand erklären?</p>
+                        <h3>I need help with maths.</h3>
+                        <p style="color: var(--color-text-muted);"> what are xyz, i dont understand them?</p>
                     </div>
                     <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;" class="flex-between">
                         <div class="comment-count">
-                            <span>💬 3 Antworten</span>
+                            <span>💬 3 Answers</span>
                         </div>
                         <button class="btn"
                             style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Antworten</button>
@@ -88,22 +87,22 @@
                             </div>
                             <div>
                                 <div style="font-weight: bold;">Tom Schmidt</div>
-                                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Vor 45 Min.</div>
+                                <div style="font-size: 0.8rem; color: var(--color-text-muted);"> 45 Min ago.</div>
                             </div>
                         </div>
-                        <span class="tag tag-lang">Französisch</span>
+                        <span class="tag tag-lang">French</span>
                     </div>
                     <div>
-                        <h3>Subjonctif Bildung</h3>
-                        <p style="color: var(--color-text-muted);">Wann genau benutze ich den Subjonctif nach "espérer"?
-                            Dachte das wäre nur bei Wunsch?</p>
+                        <h3>Subjonctifs</h3>
+                        <p style="color: var(--color-text-muted);"> when do i use Subjonctif "espérer"?
+                            I thought i can use it as i wish?</p>
                     </div>
                     <div style="border-top: 1px solid var(--color-border); padding-top: 1rem;" class="flex-between">
                         <div class="comment-count">
-                            <span>💬 0 Antworten</span>
+                            <span>💬 0 Answers</span>
                         </div>
                         <button class="btn"
-                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Antworten</button>
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--color-bg);">Answers</button>
                     </div>
                 </article>
 
@@ -123,14 +122,14 @@
     function askQuestion() {
         let coins = parseInt(localStorage.getItem('relearn_coins') || '0');
         if (coins >= COINS_REQUIRED) {
-            if (confirm(`Möchtest du ${COINS_REQUIRED} Münzen ausgeben, um eine Frage zu stellen?`)) {
+            if (confirm(`Do you want to ${COINS_REQUIRED} pay Coins, to ask a question?`)) {
                 coins -= COINS_REQUIRED;
                 localStorage.setItem('relearn_coins', coins);
-                alert(`Frage erfolgreich gepostet! -${COINS_REQUIRED} Münzen. (Verbleibend: ${coins})`);
+                alert(`Question succesfully posted! -${COINS_REQUIRED} Coins. (Verbleibend: ${coins})`);
                 // TODO: Open modal or redirect to question form.
             }
         } else {
-            if (confirm(`Nicht genug Münzen! Du hast ${coins}. Du brauchst ${COINS_REQUIRED}.\nMöchtest du Münzen sammeln spielen?`)) {
+            if (confirm(`Not enough Coins! You have ${coins}. You need ${COINS_REQUIRED}.\nyou want to play Coins Game?`)) {
                 window.location.href = 'game.html';
             }
         }
